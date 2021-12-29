@@ -1,0 +1,1205 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Snake</title>
+    <link rel="stylesheet" href="snake.css" type="text/css">
+</head>
+
+<body  id="snake_body" onkeydown="event_listener(event)" >
+    
+
+    <img  id="snake_head_b" src="images/head_blue2.png" style="position: absolute; left: 1480px; top: 400px; bottom: auto;" height="20" width="20" alt="head_blue">
+    <img  id="snake_body_b1" src="images/body_blue.png" style="position: absolute; left: 1500px; top: 400px; bottom: auto;" height="20" width="20" alt="body_blue">
+    <img  id="snake_body_b2" src="images/body_blue.png" style="position: absolute; left: 1520px; top: 400px; bottom: auto;" height="20" width="20" alt="body_blue">
+    <img  id="snake_body_b3" src="images/body_blue.png" style="position: absolute; left: 1540px; top: 400px; bottom: auto;" height="20" width="20" alt="body_blue">
+
+    <img  id="snake_head_r" src="images/head_red2.png" style="position: absolute; left: 100px; top: 400px; bottom: auto;" height="20" width="20" alt="head_red">
+    <img  id="snake_body_r1" src="images/body_red.png" style="position: absolute; left: 80px; top: 400px; bottom: auto;" height="20" width="20" alt="body_red">
+    <img  id="snake_body_r2" src="images/body_red.png" style="position: absolute; left: 60px; top: 400px; bottom: auto;" height="20" width="20" alt="body_red">
+    <img  id="snake_body_r3" src="images/body_red.png" style="position: absolute; left: 40px; top: 400px; bottom: auto;" height="20" width="20" alt="body_red">
+
+    <img  id="apple" src="images/apple.png" style="position: absolute; left: -20px; top: 400px; bottom: auto;" height="20" width="20" alt="apple">
+    <img  id="banana" src="images/banana.png" style="position: absolute; left: -20px; top: 420px; bottom: auto;" height="20" width="20" alt="banana">
+    <img  id="orange" src="images/orange.png" style="position: absolute; left: -20px; top: 440px; bottom: auto;" height="20" width="20" alt="orange">
+    <img  id="flip" src="images/flip.png" style="position: absolute; left: -20px; top: 460px; bottom: auto;" height="20" width="20" alt="flip">
+    <img  id="speed" src="images/speed.png" style="position: absolute; left: -20px; top: 480px; bottom: auto;" height="20" width="20" alt="speed">
+    <img  id="stop" src="images/stop.png" style="position: absolute; left: -20px; top: 500px; bottom: auto;" height="20" width="20" alt="stop">
+
+    <button type="button" id="buttion1" onclick="Opendialog()" style="position: absolute; left: 1520px; top: 10px; bottom: auto;">settings</button>
+
+    <dialog id="dialog2" class="dialogbox2" open>
+        <div class="anouncement">
+            <div id="red_side" class="p1"></div>
+            <div id="win_statement" class="p1"></div>
+            <div id="blue_side" class="p1"></div>
+        </div>
+        
+    </dialog>
+
+
+    <dialog id="dialog1" class="dialogbox" open>
+        <h1>Snake-Multiplayer</h1>
+        <div class="legend">Keys</div>
+        <form>
+            <div class="keyboard">
+                <p class="small_headlines">Red</p>
+                <img  class="arrow_keys" id="wasd" src="images/wasd_keys.png" alt="wasd_keys">
+            </div>
+                
+            <div  class="keyboard">
+                <p class="small_headlines">Blue</p>
+                <img  class="arrow_keys" id="arrows" src="images/arrow_keys.png" alt="arrow_keys">
+            </div>
+
+        </form>
+        <div class="legend">Items</div>
+        <form>  
+                <div class="items">
+                    <div class="singleItem"> 
+                        <label><input type="checkbox" name="Items" value="apple" checked id="apple_check">
+                            <img  src="images/apple.png" height="20" width="20" alt="apple">
+                        </label>
+                        <div class="iteminfo">&#x1F6C8;
+                            <span class="iteminfo_text">eating an apple increases your size by one</span>
+                        </div>
+                    </div>
+                    <div class="singleItem"> 
+                        <label><input type="checkbox" name="Items" value="banana" checked id="banana_check">
+                            <img  src="images/banana.png" height="20" width="20" alt="banana">
+                        </label>
+                        <div class="iteminfo">&#x1F6C8;
+                            <span class="iteminfo_text">eating a banana increases your size by one</span>
+                        </div>
+                    </div>
+                    <div class="singleItem"> 
+                        <label><input type="checkbox" name="Items" value="orange" checked id="orange_check">
+                            <img  src="images/orange.png" height="20" width="20" alt="orange">
+                        </label>
+                        <div class="iteminfo">&#x1F6C8;
+                            <span class="iteminfo_text">eating an orange increases your size by one</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="items">
+                    <div class="singleItem"> 
+                        <label><input type="checkbox" name="Items" value="flip" checked id="flip_check">
+                            <img  src="images/flip.png" height="20" width="20" alt="flip">
+                        </label>
+                        <div class="iteminfo">&#x1F6C8;
+                            <span class="iteminfo_text">flips the directional input of your enemy for 6 seconds</span>
+                        </div>
+                    </div>
+                    <div class="singleItem"> 
+                        <label><input type="checkbox" name="Items" value="speed" checked id="speed_check">
+                            <img  src="images/speed.png" height="20" width="20" alt="speed">
+                        </label>
+                        <div class="iteminfo">&#x1F6C8;
+                            <span class="iteminfo_text">doubles your speed for 6 seconds</span>
+                        </div>
+                    </div>
+                    <div class="singleItem"> 
+                        <label><input type="checkbox" name="Items" value="timestop" checked id="stop_check">
+                            <img  src="images/stop.png" height="20" width="20" alt="stop">
+                        </label>
+                        <div class="iteminfo">&#x1F6C8;
+                            <span class="iteminfo_text">stops the enemies movement for 6 seconds</span>
+                        </div>
+                    </div>
+                    
+                    
+                    
+                </div>
+        </form>
+        <div class="legend">Game Settings</div>
+        <form>
+            <div class="Rounds">
+                <p class="small_headlines">Number of Rounds</p>
+                <label><input type="number" min="1" max="20" step="1" name="Anzahl" value="1"  id="Runden" required></label>
+            </div>
+            <div class="winCondition">
+                <p class="small_headlines">Win Condition</p>
+                <div class="winCondition1">
+                    <label><input type="radio" name="Win" value="death" checked id="win_death" onclick="EnableLength()">last survivor wins</label>
+                </div>
+                <div class="winCondition2">
+                    <label><input type="radio" name="Win" value="death_length" id="win_length" onclick="EnableLength()">survive or reach certain length</label>
+                    <div>
+                        <label><input type="number"  min="8" max="100" step="1" name="Win" value="15"  id="win_length_input"  style="margin-left: 20px;visibility: hidden;" required></label>
+                     </div>
+                </div>
+            </div>
+        
+        
+        </form>
+
+        <button type="button" id="buttion_start" onclick=" Start()">start game</button>
+        
+
+
+    </dialog>
+
+
+    <script>
+
+        var loopGame;
+        var first_key_b=false;
+        var first_key_r=false;
+        var last_event_b;
+        var last_event_r;
+        var input_allowed_b = true;
+        var input_allowed_r = true;
+        var coordinate_array_b=[[1540,1520,1500,1480],[400,400,400,400]];
+        var coordinate_array_r=[[40,60,80,100],[400,400,400,400]];
+        var counter_b=coordinate_array_b[0].length-1;
+        var counter_r=coordinate_array_r[0].length-1;
+        var add_bodypart_b =false;
+        var add_bodypart_r =false;
+        var bodypart_counter_b=3;
+        var bodypart_counter_r=3;
+        var death=false;
+        var event_allowed_b=true;
+        var event_allowed_r=true;
+        var new_event_b;
+        var new_event_r;
+        var red_wincounter=0;
+        var blue_wincounter=0;
+        var determine_winner=0;
+        var rounds=1;
+        var round_counter=0;
+        var waiting_event_r=0;
+        var waiting_event_b=0;
+        var spawn_speed;
+        var spawn_flip;
+        var spawn_stop;
+
+
+        var banana_init=true;
+        var apple_init=true;
+        var orange_init=true;
+
+        var flip_b=false;
+        var flip_r=false;
+        var speed_b=false;
+        var speed_r=false;
+        var stop_b=false;
+        var stop_r=false;
+        var tact_b=0;
+        var tact_r=0;
+        var interval_speed=true;
+        var interval_flip=true;
+        var interval_stop=true;
+        var timer_flip_b;
+        var timer_flip_r;
+        var timer_speed_b;
+        var timer_speed_r;
+        var timer_stop_b;
+        var timer_stop_r;
+
+
+
+        var apple_state=false;
+        var banana_state=false;
+        var orange_state=false;
+        var flip_state=false;
+        var speed_state=false;
+        var stop_state=false;
+        var wincondition_length=false;
+        var win_bodylength=100;
+
+        function ResetVariables(){
+
+            if(bodypart_counter_r>3){
+                for(var i=4;i<=bodypart_counter_r;i++){
+                    var id_name= "snake_body_r"+i;
+                    var snake_body_r_id=document.getElementById(id_name);
+                    snake_body_r_id.parentNode.removeChild(snake_body_r_id);
+                }
+            }
+
+            if(bodypart_counter_b>3){
+                for(var i=4;i<=bodypart_counter_b;i++){
+                var id_name= "snake_body_b"+i;
+                var snake_body_b_id=document.getElementById(id_name);
+                snake_body_b_id.parentNode.removeChild(snake_body_b_id);
+                }
+            }
+            
+            clearInterval(spawn_flip);
+            clearInterval(spawn_speed);
+            clearInterval(spawn_stop);
+            clearTimeout(loopGame);
+            first_key_b=false;
+            first_key_r=false;
+            last_event_b=null;
+            last_event_r=null;
+            input_allowed_b = true;
+            input_allowed_r = true;
+            coordinate_array_b=[[1540,1520,1500,1480],[400,400,400,400]];
+            coordinate_array_r=[[40,60,80,100],[400,400,400,400]];
+            counter_b=coordinate_array_b[0].length-1;
+            counter_r=coordinate_array_r[0].length-1;
+            add_bodypart_b =false;
+            add_bodypart_r =false;
+            bodypart_counter_b=3;
+            bodypart_counter_r=3;
+            death=false;
+            event_allowed_b=true;
+            event_allowed_r=true;
+            new_event_b=null;
+            new_event_r=null;
+            determine_winner=0;
+            waiting_event_r=0;
+            waiting_event_b=0;
+
+            banana_init=true;
+            apple_init=true;
+            orange_init=true;
+
+            flip_b=false;
+            flip_r=false;
+            speed_b=false;
+            speed_r=false;
+            stop_b=false;
+            stop_r=false;
+            tact_b=0;
+            tact_r=0;
+            interval_speed=true;
+            interval_flip=true;
+            interval_stop=true;
+
+            document.getElementById("snake_head_b").style.top = coordinate_array_b[1][3] +'px';
+            document.getElementById("snake_head_r").style.top = coordinate_array_r[1][3] +'px';
+            document.getElementById("snake_head_b").style.left = coordinate_array_b[0][3] +'px';
+            document.getElementById("snake_head_r").style.left = coordinate_array_r[0][3] +'px';
+            document.getElementById("snake_head_b").style.transform = 'rotate(0deg)';
+            document.getElementById("snake_head_r").style.transform = 'rotate(0deg)';
+
+
+
+            for(var i=1;i<=bodypart_counter_b;i++){
+                    var id_name= "snake_body_b"+i;
+                    var snake_body_b_id=document.getElementById(id_name);
+                    snake_body_b_id.style.top = coordinate_array_b[1][3-i] +'px';
+                    snake_body_b_id.style.left = coordinate_array_b[0][3-i] +'px';
+
+                    var id_name= "snake_body_r"+i;
+                    var snake_body_r_id=document.getElementById(id_name);
+                    snake_body_r_id.style.top = coordinate_array_r[1][3-i] +'px';
+                    snake_body_r_id.style.left = coordinate_array_r[0][3-i] +'px';
+            }
+
+            var speed_id = document.getElementById("speed");
+            speed_id.style.top = 480+ 'px';
+            speed_id.style.left = -20+ 'px';
+
+            var flip_id = document.getElementById("flip");
+            flip_id.style.top = 460+ 'px';
+            flip_id.style.left = -20+ 'px';
+
+
+        
+            var stop_id = document.getElementById("stop");
+            stop_id.style.top = 500+ 'px';
+            stop_id.style.left = -20+ 'px';
+
+            
+        }
+
+
+            
+        function MoveHead_b(event){
+            first_key_b=true;
+            var img = document.getElementById('snake_head_b');
+
+            if (input_allowed_b == true ||event != last_event_b){
+                switch(event){
+                    case 37: //links
+                        img.style.left = parseInt(img.style.left) - 20 + 'px';
+                        img.style.transform = 'rotate(0deg)';
+                        break;
+                    case 38: //rauf
+                        img.style.top = parseInt(img.style.top) - 20 + 'px';
+                        img.style.transform = 'rotate(90deg)';
+                        break;
+
+                    case 39: //rechts
+                        img.style.left = parseInt(img.style.left) + 20 + 'px';
+                        img.style.transform = 'rotate(180deg)';
+                        break;
+
+                    case 40: //runter
+                        img.style.top = parseInt(img.style.top) + 20 + 'px';
+                        img.style.transform = 'rotate(270deg)';
+                        break;
+                }
+            }
+            input_allowed_b = false;
+            last_event_b=event;
+            move_body_b()  
+        };
+
+
+
+        function MoveHead_r(event){
+            first_key_r=true;
+            var img = document.getElementById('snake_head_r');
+
+              
+            if (input_allowed_r == true ||event != last_event_r){
+                input_allowed_r = false;
+                
+                switch(event){
+                    case 65: //links
+                        img.style.left = parseInt(img.style.left) - 20 + 'px';
+                        img.style.transform = 'rotate(180deg)';
+                        break;
+                    case 87: //rauf
+                        img.style.top = parseInt(img.style.top) - 20 + 'px';
+                        img.style.transform = 'rotate(270deg)';
+                        break;
+
+                    case 68: //rechts
+                        img.style.left = parseInt(img.style.left) + 20 + 'px';
+                        img.style.transform = 'rotate(0deg)';
+                        break;
+
+                    case 83: //runter
+                        img.style.top = parseInt(img.style.top) + 20 + 'px';
+                        img.style.transform = 'rotate(90deg)';
+                        break;
+
+                }
+
+            }
+            last_event_r=event;
+            move_body_r()  
+        };
+
+
+        //moves and creates body parts
+        function move_body_b()
+        {
+            //get coordinates of snake head
+            var element = document.getElementById("snake_head_b");
+            counter_b++;
+            coordinate_array_b[1][counter_b]= parseInt(element.style.top);
+            coordinate_array_b[0][counter_b]= parseInt(element.style.left);
+
+            if (add_bodypart_b==true)
+                {
+                    add_bodypart_b=false;
+                    bodypart_counter_b++;
+                        var id_name= "snake_body_b"+bodypart_counter_b;
+                        var img = document.createElement('img');
+                        img.src="images/body_blue.png"
+                        img.height="20";
+                        img.width="20";
+                        img.id=id_name
+                        img.style.position = "absolute";
+                        
+                        document.getElementById('snake_body').appendChild(img);
+                   // }
+                 }
+                 for(var i=1;i<=bodypart_counter_b;i++){
+                    var id_name= "snake_body_b"+i;
+                    var snake_body_b_id=document.getElementById(id_name);
+                    snake_body_b_id.style.top = coordinate_array_b[1][counter_b-i] + 'px';
+                    snake_body_b_id.style.left = coordinate_array_b[0][counter_b-i] + 'px';
+                 }
+        }
+
+
+        function move_body_r()
+        {
+            //get coordinates of snake head
+            var element = document.getElementById("snake_head_r");
+            counter_r++;
+            coordinate_array_r[1][counter_r]= parseInt(element.style.top);
+            coordinate_array_r[0][counter_r]= parseInt(element.style.left);
+
+            if (add_bodypart_r==true)
+                {
+                    add_bodypart_r=false;
+                    bodypart_counter_r++;
+                        var id_name= "snake_body_r"+bodypart_counter_r;
+                        var img = document.createElement('img');
+                        img.src="images/body_red.png"
+                        img.height="20";
+                        img.width="20";
+                        img.id=id_name
+                        img.style.position = "absolute";
+                        
+                        document.getElementById('snake_body').appendChild(img);
+                   // }
+                 }
+                 for(var i=1;i<=bodypart_counter_r;i++){
+                    var id_name= "snake_body_r"+i;
+                    var snake_body_r_id=document.getElementById(id_name);
+                    snake_body_r_id.style.top = coordinate_array_r[1][counter_r-i] + 'px';
+                    snake_body_r_id.style.left = coordinate_array_r[0][counter_r-i] + 'px';
+                 }
+        }
+
+
+
+        
+
+
+        function event_listener(event){ 
+            var reverse_key_b=false;
+            var reverse_key_r=false;
+            var flip_b_event;
+            var flip_r_event;
+
+            //blue
+            if (new_event_b != undefined){
+                if(new_event_b==37 && event.keyCode==39 || new_event_b==39 && event.keyCode==37){
+                    reverse_key_b=true;
+                }
+                if(new_event_b==38 && event.keyCode==40 || new_event_b==40 && event.keyCode==38){
+                    reverse_key_b=true;
+                }
+            }
+            else if(event.keyCode==39){
+                reverse_key_b=true; // links
+            }
+
+            if (event_allowed_b==true && reverse_key_b ==false && new_event_b != event.keyCode && (event.keyCode == 37 || event.keyCode == 38 || event.keyCode == 39 || event.keyCode == 40)){
+                waiting_event_b=0;
+                event_allowed_b=false;
+
+                if(flip_b==true){
+                    if (event.keyCode==39)
+                        flip_b_event=37;
+                    if (event.keyCode==37)
+                        flip_b_event=39;
+                    if (event.keyCode==38)
+                        flip_b_event=40;
+                    if (event.keyCode==40)
+                        flip_b_event=38;
+
+                    new_event_b=flip_b_event;
+                }
+                else{
+                    new_event_b=event.keyCode;
+                }
+            }
+            if(event_allowed_b==false && (event.keyCode == 37 || event.keyCode == 38 || event.keyCode == 39 || event.keyCode == 40)){
+                waiting_event_b=event;
+            }
+
+
+
+            //red
+            if (new_event_r != undefined){
+                if(new_event_r==87 && event.keyCode==83 || new_event_r==83 && event.keyCode==87){
+                    reverse_key_r=true;
+                }
+                if(new_event_r==65 && event.keyCode==68 || new_event_r==68 && event.keyCode==65){
+                    reverse_key_r=true;
+                }
+            }
+            else if(event.keyCode==65){
+                reverse_key_r=true; //D (rechts)
+            }
+            if (event_allowed_r==true && reverse_key_r ==false && new_event_r != event.keyCode && (event.keyCode == 65 || event.keyCode == 87 || event.keyCode == 68 || event.keyCode == 83)){
+                event_allowed_r=false;
+                waiting_event_r=0;
+
+                if(flip_r==true){
+                    if (event.keyCode==87)
+                        flip_r_event=83;
+                    if (event.keyCode==83)
+                        flip_r_event=87;
+                    if (event.keyCode==65)
+                        flip_r_event=68;
+                    if (event.keyCode==68)
+                        flip_r_event=65;
+
+                    new_event_r=flip_r_event;
+                }
+                else{
+                    new_event_r=event.keyCode;
+                }
+            }
+
+            if(event_allowed_r==false && (event.keyCode == 65 || event.keyCode == 87 || event.keyCode == 68 || event.keyCode == 83)){
+                waiting_event_r=event;
+            }
+
+        }
+
+        function Blue_actions()
+        {
+            if (stop_b==false){
+                if(tact_b==0 || speed_b==true){
+                    if(first_key_b==true && last_event_b!= new_event_b || new_event_b != null && first_key_b==false && new_event_r != null){
+                            MoveHead_b(new_event_b);
+                    }
+                    else if (first_key_b==true)
+                    {
+                        input_allowed_b=true;
+                        MoveHead_b(last_event_b);
+                    }
+                    event_allowed_b=true;
+                    tact_b=1;
+                    }
+                else{
+                    tact_b=0;
+                }
+            }
+        }
+
+        function Red_actions()
+        {
+            if(stop_r==false){
+                if(tact_r==0 || speed_r==true){
+                if(first_key_r==true && last_event_r != new_event_r || new_event_r != null && first_key_r==false && new_event_b != null){
+                    MoveHead_r(new_event_r);
+                }
+        
+                else if (first_key_r==true )
+                {
+                    input_allowed_r=true;
+                    MoveHead_r(last_event_r);
+                }
+
+                event_allowed_r=true;
+                tact_r=1;
+                }
+            else{
+                tact_r=0;
+            }
+            }
+            
+        }
+
+        
+        
+
+
+
+
+        function Apple()
+        {
+            var check_head_b=coordinate_array_b[0].length-1;
+            var check_head_r=coordinate_array_r[0].length-1;
+
+            var apple_id = document.getElementById("apple");
+
+            var apple_y= parseInt(apple_id.style.top);
+            var apple_x= parseInt(apple_id.style.left);
+
+            var random_xy=Random_XY();
+            random_x=random_xy[0];
+            random_y=random_xy[1];
+
+            if(apple_y ==coordinate_array_b[1][check_head_b] && apple_x == coordinate_array_b[0][check_head_b]){
+                apple_id.style.top = random_y +'px';
+                apple_id.style.left = random_x +'px';
+                add_bodypart_b=true;
+            }
+            else if(apple_y ==coordinate_array_r[1][check_head_r] && apple_x == coordinate_array_r[0][check_head_r]){
+                apple_id.style.top = random_y +'px';
+                apple_id.style.left = random_x +'px';
+                add_bodypart_r=true;
+            }
+            else if(apple_init==true)
+            {
+                apple_init=false;
+                apple_id.style.top = random_y +'px';
+                apple_id.style.left = random_x +'px';
+            }
+        }
+
+        function Banana()
+        {
+            var check_head_b=coordinate_array_b[0].length-1;
+            var check_head_r=coordinate_array_r[0].length-1;
+
+            var banana_id = document.getElementById("banana");
+
+            var banana_y= parseInt(banana_id.style.top);
+            var banana_x= parseInt(banana_id.style.left);
+
+            var random_xy=Random_XY();
+            random_x=random_xy[0];
+            random_y=random_xy[1];
+            
+            
+
+
+            if(banana_y ==coordinate_array_b[1][check_head_b] && banana_x == coordinate_array_b[0][check_head_b]){
+                banana_id.style.top = random_y +'px';
+                banana_id.style.left = random_x +'px';
+                add_bodypart_b=true;
+            }
+            else if(banana_y ==coordinate_array_r[1][check_head_r] && banana_x == coordinate_array_r[0][check_head_r]){
+                banana_id.style.top = random_y +'px';
+                banana_id.style.left = random_x +'px';
+                add_bodypart_r=true;
+            }
+            else if(banana_init==true)
+            {
+                banana_init=false;
+                banana_id.style.top = random_y +'px';
+                banana_id.style.left = random_x +'px';
+            }
+        }
+
+        function Orange()
+        {
+            var check_head_b=coordinate_array_b[0].length-1;
+            var check_head_r=coordinate_array_r[0].length-1;
+
+            var orange_id = document.getElementById("orange");
+
+            var orange_y= parseInt(orange_id.style.top);
+            var orange_x= parseInt(orange_id.style.left);
+
+            var random_xy=Random_XY();
+            random_x=random_xy[0];
+            random_y=random_xy[1];
+
+
+            if(orange_y ==coordinate_array_b[1][check_head_b] && orange_x == coordinate_array_b[0][check_head_b]){
+                orange_id.style.top = random_y +'px';
+                orange_id.style.left = random_x +'px';
+                add_bodypart_b=true;
+            }
+            else if(orange_y ==coordinate_array_r[1][check_head_r] && orange_x == coordinate_array_r[0][check_head_r]){
+                orange_id.style.top = random_y +'px';
+                orange_id.style.left = random_x +'px';
+                add_bodypart_r=true;
+            }
+            else if(orange_init==true)
+            {
+                orange_init=false;
+                orange_id.style.top = random_y +'px';
+                orange_id.style.left = random_x +'px';
+            }
+        }
+
+        function FlipDirection()
+        {
+            var check_head_b=coordinate_array_b[0].length-1;
+            var check_head_r=coordinate_array_r[0].length-1;
+
+            var flip_id = document.getElementById("flip");
+
+            var flip_y= parseInt(flip_id.style.top);
+            var flip_x= parseInt(flip_id.style.left);
+
+
+
+            var random_interval=(Math.floor(Math.random() * (Math.floor(60) - Math.floor(10) + 1))+Math.floor(10))*1000;
+            if (interval_flip==true)
+            {   
+                spawn_flip=setTimeout(function(){
+                    var random_xy=Random_XY();
+                    random_x=random_xy[0];
+                    random_y=random_xy[1];
+                    if( flip_id.style.top == (460+'px') && flip_id.style.left == (-20+ 'px')){
+                        flip_id.style.top = random_y +'px';
+                        flip_id.style.left = random_x +'px';
+                    }
+                    interval_flip=true;
+                },random_interval);
+            interval_flip=false;
+            }
+
+            if(flip_y ==coordinate_array_b[1][check_head_b] && flip_x == coordinate_array_b[0][check_head_b]){
+                flip_id.style.top = 460+ 'px';
+                flip_id.style.left = -20+ 'px';
+                flip_r=true;
+                clearTimeout(timer_flip_r);
+            }
+            else if(flip_y ==coordinate_array_r[1][check_head_r] && flip_x == coordinate_array_r[0][check_head_r]){
+                flip_id.style.top = 460+ 'px';
+                flip_id.style.left = -20+ 'px';
+                flip_b=true;
+                clearTimeout(timer_flip_b);
+
+            }
+
+        }
+
+        
+        function Speed()
+        {
+            var check_head_b=coordinate_array_b[0].length-1;
+            var check_head_r=coordinate_array_r[0].length-1;
+
+            var speed_id = document.getElementById("speed");
+
+            var speed_y= parseInt(speed_id.style.top);
+            var speed_x= parseInt(speed_id.style.left);
+
+           
+            
+
+            var random_interval=(Math.floor(Math.random() * (Math.floor(60) - Math.floor(10) + 1))+Math.floor(10))*1000;
+            if (interval_speed==true)
+            {   
+
+                spawn_speed=setTimeout(function(){
+                    var random_xy=Random_XY();
+                    random_x=random_xy[0];
+                    random_y=random_xy[1];
+                    if( speed_id.style.top == (480+'px') && speed_id.style.left == (-20+ 'px')){
+                        speed_id.style.top = random_y +'px';
+                        speed_id.style.left = random_x +'px';
+                    }
+                    interval_speed=true;
+                },random_interval);
+            interval_speed=false;
+            }
+            
+
+
+            if(speed_y ==coordinate_array_b[1][check_head_b] && speed_x == coordinate_array_b[0][check_head_b]){
+                speed_id.style.top = 480+ 'px';
+                speed_id.style.left = -20+ 'px';
+                speed_b=true;
+                clearTimeout(timer_speed_b);
+            }
+            else if(speed_y ==coordinate_array_r[1][check_head_r] && speed_x == coordinate_array_r[0][check_head_r]){
+                speed_id.style.top = 480+ 'px';
+                speed_id.style.left = -20+ 'px';
+                speed_r=true;
+                clearTimeout(timer_speed_r);
+
+            }
+
+        }
+
+        function Stop()
+        {
+            var check_head_b=coordinate_array_b[0].length-1;
+            var check_head_r=coordinate_array_r[0].length-1;
+
+            var stop_id = document.getElementById("stop");
+
+            var stop_y= parseInt(stop_id.style.top);
+            var stop_x= parseInt(stop_id.style.left);
+
+
+            var random_interval=(Math.floor(Math.random() * (Math.floor(60) - Math.floor(10) + 1))+Math.floor(10))*1000;
+            if (interval_stop==true)
+            {   
+
+                spawn_stop=setTimeout(function(){
+                    var random_xy=Random_XY();
+                    random_x=random_xy[0];
+                    random_y=random_xy[1];
+                    if( stop_id.style.top == 500+'px' && stop_id.style.left == (-20+ 'px')){
+                        stop_id.style.top = random_y +'px';
+                        stop_id.style.left = random_x +'px';
+                    }
+                    interval_stop=true;
+                },random_interval);
+            interval_stop=false;
+            }
+
+            if(stop_y ==coordinate_array_b[1][check_head_b] && stop_x == coordinate_array_b[0][check_head_b]){
+                stop_id.style.top = 500+ 'px';
+                stop_id.style.left = -20+ 'px';
+                stop_r=true;
+                clearTimeout(timer_stop_r);
+            }
+            else if(stop_y ==coordinate_array_r[1][check_head_r] && stop_x == coordinate_array_r[0][check_head_r]){
+                stop_id.style.top = 500+ 'px';
+                stop_id.style.left = -20+ 'px';
+                stop_b=true;
+                clearTimeout(timer_stop_b);
+
+            }
+
+        }
+
+
+        function Random_XY(){
+            var max_y = Math.floor(37); //37*20=740
+            var min_y = Math.ceil(3); //3*20=60
+            var random_y=(Math.floor(Math.random() * (max_y - min_y + 1))+min_y)*20;
+            
+            var max_x = Math.floor(77); //77*20=1540
+            var min_x = Math.ceil(3); //3*20=60
+            var random_x=(Math.floor(Math.random() * (max_x - min_x + 1))+min_x)*20;
+
+            return[random_x,random_y]
+        }
+
+        function GameOver(){
+            var check_head_b=coordinate_array_b[0].length-1;
+            var check_head_r=coordinate_array_r[0].length-1;
+            var head_r_hitbox_x=coordinate_array_r[0][check_head_r];
+            var head_r_hitbox_y=coordinate_array_r[1][check_head_r];
+            var head_b_hitbox_x=coordinate_array_b[0][check_head_b];
+            var head_b_hitbox_y=coordinate_array_b[1][check_head_b];
+
+
+            //last head hitbox
+            var head_r_hitbox_x_old=coordinate_array_r[0][check_head_r-1];
+            var head_r_hitbox_y_old=coordinate_array_r[1][check_head_r-1];
+            var head_b_hitbox_x_old=coordinate_array_b[0][check_head_b-1];
+            var head_b_hitbox_y_old=coordinate_array_b[1][check_head_b-1];
+
+            if((head_r_hitbox_x_old == head_b_hitbox_x && head_r_hitbox_y_old == head_b_hitbox_y &&
+                head_r_hitbox_x == head_b_hitbox_x_old && head_r_hitbox_y == head_b_hitbox_y_old) ||
+                (head_r_hitbox_x == head_b_hitbox_x && head_r_hitbox_y == head_b_hitbox_y))
+                {
+                    determine_winner=4; //draw=4
+                    death=true;
+                }
+            else{
+                
+            
+            //blue
+                for(i=1;i<=bodypart_counter_b;i++){
+                    var body_b_hitbox_x=coordinate_array_b[0][check_head_b-i];
+                    var body_b_hitbox_y=coordinate_array_b[1][check_head_b-i];
+                    
+                    if (death ==false){
+                        if (body_b_hitbox_x== head_b_hitbox_x && body_b_hitbox_y ==head_b_hitbox_y){
+                            red_wincounter++;
+                            death=true;
+                            determine_winner=1; //red=1
+
+                        }
+                        else if(body_b_hitbox_x== head_r_hitbox_x && body_b_hitbox_y ==head_r_hitbox_y){
+                            blue_wincounter++;
+                            death=true;
+                            determine_winner=2; //blue=2
+                        }
+                    } 
+                }   
+
+
+                if(head_b_hitbox_x <=20 || head_b_hitbox_x>=1560 || head_b_hitbox_y<=20 || head_b_hitbox_y>=760){
+                    red_wincounter++;
+                    death=true;
+                    determine_winner=1;
+                }
+                if(head_r_hitbox_x <=20 || head_r_hitbox_x>=1560 || head_r_hitbox_y<=20|| head_r_hitbox_y>=760){
+                    blue_wincounter++;
+                    death=true;
+                    determine_winner=2;
+                }
+
+
+                //red
+                for(i=1;i<=bodypart_counter_r;i++){
+                    var body_r_hitbox_x=coordinate_array_r[0][check_head_r-i];
+                    var body_r_hitbox_y=coordinate_array_r[1][check_head_r-i];
+
+                    if (death ==false){
+                        if (body_r_hitbox_x== head_r_hitbox_x && body_r_hitbox_y ==head_r_hitbox_y){
+                            blue_wincounter++;
+                            death=true;
+                            determine_winner=2;
+                        }
+                        else if(body_r_hitbox_x== head_b_hitbox_x && body_r_hitbox_y ==head_b_hitbox_y){
+                            red_wincounter++;
+                            death=true;
+                            determine_winner=1;
+                        }
+                    } 
+                }     
+            }
+
+
+            if(wincondition_length==true && bodypart_counter_b>=win_bodylength){
+                blue_wincounter++;
+                death=true;
+                determine_winner=2;
+            }
+            else if(wincondition_length==true && bodypart_counter_r>=win_bodylength){
+                red_wincounter++;
+                death=true;
+                determine_winner=1;
+            }
+
+            if (death==true){
+                Announcements();
+                round_counter++;
+                if (round_counter < rounds){
+                    setTimeout(function(){
+                        ResetVariables();
+                        gameLoop();
+                        document.getElementById("blue_side").textContent = '';
+                        document.getElementById("red_side").textContent = '';
+                        Announcements();
+                    },3000);
+                }
+                else{
+                    setTimeout(function(){
+                        round_counter=0;
+                        red_wincounter=0;
+                        blue_wincounter=0;
+                        ResetVariables();
+                        document.getElementById("blue_side").textContent = '';
+                        document.getElementById("red_side").textContent = '';
+                        document.getElementById("win_statement").textContent = '';
+                        Opendialog();
+                        
+                    },4000);
+                }
+                
+ 
+            }
+
+        }
+
+        function Opendialog(){
+            var dialogbox = document.getElementById("dialog1");
+            if (dialogbox.style.display === "none") //|| dialogbox.style.display === "") 
+            {
+                dialogbox.style.display = "block";
+            } else {
+                dialogbox.style.display = "none";
+            }
+        }
+
+        function Menue(){
+            apple_state=document.getElementById("apple_check").checked;
+            orange_state=document.getElementById("orange_check").checked;
+            banana_state=document.getElementById("banana_check").checked;
+            flip_state=document.getElementById("flip_check").checked;
+            speed_state=document.getElementById("speed_check").checked;
+            stop_state=document.getElementById("stop_check").checked;
+
+            wincondition_length=document.getElementById("win_length").checked;
+            win_bodylength= document.getElementById("win_length_input").value;
+            rounds=document.getElementById("Runden").value;
+
+            
+
+            
+        }
+
+        function EnableLength(){
+            wincondition_length=document.getElementById("win_length").checked;
+            var winlength_input= document.getElementById("win_length_input");
+
+            if(wincondition_length==true){
+                
+                winlength_input.style.visibility = "visible";
+            }
+            else if(wincondition_length==false){
+                winlength_input.style.visibility= "hidden"; 
+            }
+        }
+
+        function Start(){
+            Opendialog();
+            Menue();
+            ResetVariables();
+            Announcements();
+            gameLoop();
+
+        }
+
+
+        function Announcements(){
+            var arlong=document.getElementById("red_side");
+            if (determine_winner==0 && death==false){ 
+                
+                document.getElementById("win_statement").innerHTML = "Input directional-key to start";
+
+
+                if(new_event_b!=undefined && new_event_r!=undefined){
+                    document.getElementById("win_statement").textContent = '';
+                    document.getElementById("blue_side").textContent = '';
+                    document.getElementById("red_side").textContent = '';
+                }
+                else if(new_event_b!=undefined){
+                    document.getElementById("blue_side").innerHTML ='\u2713';
+                }
+                else if(new_event_r!=undefined){
+                    document.getElementById("red_side").innerHTML ='\u2713';
+                }
+            }
+            else if(determine_winner !=0 && round_counter <rounds){
+                if (determine_winner==4){
+                    document.getElementById("win_statement").textContent = 'Draw!';
+                }
+                else if(determine_winner==1){
+                    document.getElementById("win_statement").textContent = "Red won the " +round_counter+". Round";
+                }
+                else if(determine_winner==2){
+                    document.getElementById("win_statement").textContent = "Blue won the " +round_counter+". Round";
+                }
+
+                if (red_wincounter==1){
+                    document.getElementById("red_side").innerHTML = "Red: "+red_wincounter+" point";
+                }
+                else{
+                    document.getElementById("red_side").innerHTML = "Red: "+red_wincounter+" points";
+                }
+
+                if (blue_wincounter==1){
+                    document.getElementById("blue_side").innerHTML = "Blue: "+blue_wincounter+" point";
+                }
+                else{
+                    document.getElementById("blue_side").innerHTML = "Blue: "+blue_wincounter+" points";
+                }
+                
+            }
+            else if(determine_winner !=0 && round_counter >=rounds){
+                if (red_wincounter==blue_wincounter){
+                    document.getElementById("win_statement").textContent = 'Draw!';
+                }
+                else if(red_wincounter>blue_wincounter){
+                    document.getElementById("win_statement").textContent = "Red won the Game";
+                }
+                else if(red_wincounter<blue_wincounter){
+                    document.getElementById("win_statement").textContent = "Blue won the Game";
+                }
+
+                if (red_wincounter==1){
+                    document.getElementById("red_side").innerHTML = "Red: "+red_wincounter+" point";
+                }
+                else{
+                    document.getElementById("red_side").innerHTML = "Red: "+red_wincounter+" points";
+                }
+
+                if (blue_wincounter==1){
+                    document.getElementById("blue_side").innerHTML = "Blue: "+blue_wincounter+" point";
+                }
+                else{
+                    document.getElementById("blue_side").innerHTML = "Blue: "+blue_wincounter+" points";
+                }
+            }
+   
+        }
+
+        
+
+
+        function gameLoop()
+        {
+            if (death==false){
+                GameOver();
+                 if(waiting_event_r !=0){
+                    event_listener(waiting_event_r);
+                 }
+                 if(waiting_event_b !=0){
+                    event_listener(waiting_event_b);
+                 }
+                
+
+                //blue
+                    Blue_actions();
+                //red
+                    Red_actions();
+
+                
+                    
+                if (document. readyState === 'complete'){
+                    
+
+                    if (apple_state==true){
+                        Apple();
+                    }
+                    else{
+                        var apple_id = document.getElementById("apple");
+                        apple_id.style.top = 400+ 'px';
+                        apple_id.style.left = -20+ 'px';
+                    }
+                    if(banana_state==true){
+                        Banana();
+                    }
+                    else{
+                        var banana_id = document.getElementById("banana");
+                        banana_id.style.top = 420+ 'px';
+                        banana_id.style.left = -20+ 'px';
+                    }
+                    if(orange_state==true){
+                        Orange();
+                    }
+                    else{
+                        var orange_id = document.getElementById("orange");
+                        orange_id.style.top = 440+ 'px';
+                        orange_id.style.left = -20+ 'px';
+                    }
+                    if(flip_state==true){
+                        FlipDirection();
+                    }
+                    else{
+                        var flip_id = document.getElementById("flip");
+                        flip_id.style.top = 460+ 'px';
+                        flip_id.style.left = -20+ 'px';
+                    }
+                    if(speed_state==true){
+                        Speed();
+                    }
+                    else{
+                        var speed_id = document.getElementById("speed");
+                        speed_id.style.top = 480+ 'px';
+                        speed_id.style.left = -20+ 'px';
+                    }
+                    if(stop_state==true){
+                        Stop();
+                    }
+                    else{
+                        var stop_id = document.getElementById("stop");
+                        stop_id.style.top = 500+ 'px';
+                        stop_id.style.left = -20+ 'px';
+                    }
+                    
+                    
+                    
+                    
+                }
+
+                if (flip_b==true){
+                    timer_flip_b=setTimeout(function(){flip_b=false},6000);
+                }
+                if (flip_r==true){
+                    timer_flip_r=setTimeout(function(){flip_r=false},6000);
+                }
+
+                if (speed_b==true){
+                    timer_speed_b=setTimeout(function(){speed_b=false},6000);
+                }
+                if (speed_r==true){
+                    timer_speed_r=setTimeout(function(){speed_r=false},6000);
+                }
+
+                if (stop_b==true){
+                    timer_stop_b=setTimeout(function(){stop_b=false},6000);
+                }
+                if (stop_r==true){
+                    timer_stop_r=setTimeout(function(){stop_r=false},6000);
+                }
+
+                var announcement_init_red=false;
+                var announcement_init_blue=false;
+                if(new_event_b!=undefined && announcement_init_blue==false){
+                    Announcements();
+                    announcement_init_blue=false;
+                }
+                if(new_event_r!=undefined && announcement_init_red==false){
+                    Announcements();
+                    announcement_init_red=false;
+                }
+                loopGame=setTimeout("gameLoop()",50);
+            }  
+        }
+
+        
+        
+
+    </script>
+</body>
+
+
+
+
+</html>
